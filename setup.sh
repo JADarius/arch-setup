@@ -7,7 +7,7 @@ sudo pacman -Syu
 sudo pacman --needed -S xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
 # install other packages
 sudo pacman --needed -S base-devel xorg-server xorg-xinit zip unzip mpc mpd neovim git
-sudo pacman --needed -S firefox flameshot discord steam yt-dlp mpv ffmpeg acpilight dmenu ttf-hack-nerd ttf-meslo-nerd noto-fonts noto-fonts-cjk picom slock xclip ncmpcpp dunst
+sudo pacman --needed -S firefox discord steam yt-dlp mpv ffmpeg acpilight dmenu ttf-hack-nerd ttf-meslo-nerd noto-fonts noto-fonts-cjk picom slock xclip ncmpcpp dunst maim lf ranger
 # create basic home folders
 sudo pacman --needed -S xdg-user-dirs
 xdg-user-dirs-update
