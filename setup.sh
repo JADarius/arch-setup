@@ -39,5 +39,12 @@ git clone https://github.com/jadarius/status-scripts.git ~/status-scripts
 git clone https://github.com/jadarius/dwmblocks.git ~/dwmblocks
 cd ~/dwmblocks
 make && sudo make install
+# setup ranger (lf soon?)
+ranger --copy-config=all
+# setup zsh
+sudo pacman -S zsh zsh-completions
+cp .zshrc .zprofile ~
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 # finish
 reboot
