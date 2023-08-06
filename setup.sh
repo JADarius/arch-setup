@@ -1,33 +1,44 @@
-#!/bin/bash
+#!/bin/sh
 
 # update the packages
 sudo pacman -Syu 
 # install the good drivers
 # amd
-sudo pacman --needed -S xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
+sudo pacman --needed --noconfirm -S xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
 # install other packages
-sudo pacman --needed -S base-devel xorg-server xorg-xinit zip unzip mpc mpd neovim git
-sudo pacman --needed -S firefox discord steam yt-dlp mpv ffmpeg acpilight dmenu ttf-hack-nerd ttf-meslo-nerd noto-fonts noto-fonts-cjk picom slock xclip ncmpcpp dunst maim lf ranger
+sudo pacman --needed --noconfirm -S base-devel xorg-server xorg-xinit zip unzip mpc mpd neovim git xorg-apps \ 
+	firefox discord steam yt-dlp mpv ffmpeg acpilight dmenu ttf-hack-nerd ttf-meslo-nerd noto-fonts \
+	noto-fonts-cjk noto-fonts-emoji picom slock xclip ncmpcpp dunst maim lf ranger clang
 # create basic home folders
-sudo pacman --needed -S xdg-user-dirs
+sudo pacman --needed --noconfirm -S xdg-user-dirs
 xdg-user-dirs-update
 # move config files
 mv .bashrc .bash_profile .xinitrc ~
 mv picom.conf ~/.config/
 # move the scripts
 mv *.sh ~
-# move the wallpapers
+# init the wallpapers folder
 mv Wallpapers ~
+curl -o ~/Wallpapers/1.jpg 'https://pbs.twimg.com/media/F19PMQSaMAEVGjS?format=jpg&name=4096x4096'
 # mpd setup
 mkdir ~/.config/mpd
 mv mpd.conf ~/.config/mpd
 mkdir ~/.config/mpd/playlists
 systemctl enable mpd --user
+# rust install
+sudo pacman --needed --noconfirm -S rustup
+rustup default stable
+# paru setup
+git clone https://aur.archlinux.org/paru.git ~/paru
+cd paru
+makepkg -sirc --noconfirm
 # neovim setup
 git clone https://github.com/JADarius/kickstart.nvim.git ~/.config/nvim
 # clone the dwm build
 git clone https://github.com/jadarius/dwm.git ~/dwm
 cd ~/dwm
+rm config.h config.def.h
+mv backupconf config.def.h
 make && sudo make install
 # clone the st build
 git clone https://github.com/jadarius/st.git ~/st
@@ -42,7 +53,7 @@ make && sudo make install
 # setup ranger (lf soon?)
 ranger --copy-config=all
 # setup zsh
-sudo pacman -S zsh zsh-completions
+sudo pacman --needed --noconfirm -S zsh zsh-completions
 cp .zshrc .zprofile ~
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
