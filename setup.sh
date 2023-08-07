@@ -1,7 +1,10 @@
 #!/bin/sh
 
 # update the packages
-sudo pacman -Syu 
+sudo pacman -Syu --noconfirm
+# install the sound server
+sudo pacman --needed --noconfirm -S pipewire lib32-pipewire pipewire-docs \
+	wireplumber pipewire-audio
 # install the good drivers
 # amd
 sudo pacman --needed --noconfirm -S xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
@@ -28,6 +31,11 @@ systemctl enable mpd --user
 # rust install
 sudo pacman --needed --noconfirm -S rustup
 rustup default stable
+# setup zsh
+sudo pacman --needed --noconfirm -S zsh zsh-completions
+mv .zshrc .zprofile ~
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 # paru setup
 git clone https://aur.archlinux.org/paru.git ~/paru
 cd paru
@@ -52,10 +60,5 @@ cd ~/dwmblocks
 make && sudo make install
 # setup ranger (lf soon?)
 ranger --copy-config=all
-# setup zsh
-sudo pacman --needed --noconfirm -S zsh zsh-completions
-cp .zshrc .zprofile ~
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 # finish
 reboot
