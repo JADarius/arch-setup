@@ -47,8 +47,6 @@ git clone https://github.com/JADarius/kickstart.nvim.git ~/.config/nvim
 # clone the dwm build
 git clone https://github.com/jadarius/dwm.git ~/dwm
 cd ~/dwm
-rm config.h config.def.h
-mv backupconf config.def.h
 make && sudo make install
 # clone the st build
 git clone https://github.com/jadarius/st.git ~/st
