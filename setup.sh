@@ -3,16 +3,12 @@
 # update the packages
 sudo pacman -Syu --noconfirm
 # install the sound server
-sudo pacman --needed --noconfirm -S pipewire lib32-pipewire pipewire-docs \
-	wireplumber pipewire-audio pipewire-pulse pulsemixer
+sudo pacman -S --needed --noconfirm - < audio.txt
 # install the good drivers
 # amd
-sudo pacman --needed --noconfirm -S xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
+sudo pacman -S --needed --noconfirm - < amd.txt
 # install other packages
-sudo pacman --needed --noconfirm -S base-devel xorg-server xorg-xinit zip unzip mpc mpd neovim git xorg-apps \ 
-	firefox discord steam yt-dlp mpv ffmpeg acpilight dmenu ttf-hack-nerd ttf-meslo-nerd noto-fonts \
-	noto-fonts-cjk noto-fonts-emoji picom slock xclip ncmpcpp dunst maim lf ranger clang sxiv \
-	zathura zathura-pdf-mupdf p7zip hsetroot python-pywal
+sudo pacman -S --needed --noconfirm - < pkglist.txt
 # create basic home folders
 sudo pacman --needed --noconfirm -S xdg-user-dirs
 xdg-user-dirs-update

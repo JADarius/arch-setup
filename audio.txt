@@ -1,0 +1,7 @@
+pipewire
+lib32-pipewire
+pipewire-docs
+wireplumber
+pipewire-audio
+pipewire-pulse
+pulsemixer
