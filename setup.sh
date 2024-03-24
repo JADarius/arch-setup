@@ -13,14 +13,8 @@ sudo pacman -S --needed --noconfirm - < pkglist.txt
 sudo pacman --needed --noconfirm -S xdg-user-dirs
 xdg-user-dirs-update
 # move config files
-mv .bashrc .bash_profile .xinitrc ~
+mv .bashrc .bash_profile ~
 mv picom.conf ~/.config/
-# move the scripts
-mv *.sh ~
-# init the wallpapers folder
-mv Wallpapers ~
-curl -o ~/Wallpapers/1.jpg 'https://pbs.twimg.com/media/F19PMQSaMAEVGjS?format=jpg&name=4096x4096'
-wal -i ~/Wallpapers/1.jpg
 # mpd setup
 mkdir ~/.config/mpd
 mv mpd.conf ~/.config/mpd
@@ -30,31 +24,29 @@ systemctl enable mpd --user
 sudo pacman --needed --noconfirm -S rustup
 rustup default stable
 # setup zsh
-sudo pacman --needed --noconfirm -S zsh zsh-completions
-mv .zshrc .zprofile ~
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+echo "Do you want to install zsh? [y/n]"
+read ZSH
+if [[ $ZSH == "y" ]]; then
+	sudo pacman --needed --noconfirm -S zsh zsh-completions
+	mv .zshrc .zprofile ~
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+	echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+fi
 # paru setup
 git clone https://aur.archlinux.org/paru.git ~/paru
 cd ~/paru
 makepkg -sirc --noconfirm
 # neovim setup
-git clone https://github.com/JADarius/kickstart.nvim.git ~/.config/nvim
-# clone the dwm build
-git clone https://github.com/jadarius/dwm.git ~/dwm
-cd ~/dwm
-make && sudo make install
-# clone the st build
-git clone https://github.com/jadarius/st.git ~/st
-cd ~/st
-make && sudo make install
-# clone the status scripts
-git clone https://github.com/jadarius/status-scripts.git ~/status-scripts
-# clone dwmblocks
-git clone https://github.com/jadarius/dwmblocks.git ~/dwmblocks
-cd ~/dwmblocks
-make && sudo make install
-# setup ranger (lf soon?)
-ranger --copy-config=all
+git clone https://github.com/nvim-lua/kickstart.nvim.git ~/.config/nvim
+echo "What window manager/desktop environment do you want?"
+echo "Possible options: dwm, xfce4"
+read GUI
+if [[ $GUI == "dwm" ]]; then
+	./dwm.sh
+elif [[ $GUI == "xfce4" ]]; then
+	./xfce4.sh
+fi
 # finish
+cd ~
+rm -rf arch-setup
 reboot
