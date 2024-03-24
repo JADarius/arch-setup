@@ -12,6 +12,8 @@ sudo pacman -S --needed --noconfirm - < pkglist.txt
 # create basic home folders
 sudo pacman --needed --noconfirm -S xdg-user-dirs
 xdg-user-dirs-update
+# turn on NTP
+sudo timedatectl set-ntp true
 # move config files
 mv .bashrc .bash_profile ~
 mv picom.conf ~/.config/
