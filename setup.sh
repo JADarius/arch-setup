@@ -47,6 +47,8 @@ if [[ $GUI == "dwm" ]]; then
 	./dwm.sh
 elif [[ $GUI == "xfce4" ]]; then
 	./xfce4.sh
+elif [[ $GUI == "hyprland" ]]; then
+	./hyprland.sh
 fi
 # finish
 cd ~
